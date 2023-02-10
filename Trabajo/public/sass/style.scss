@@ -1,0 +1,47 @@
+//VARIABLES
+$color-cabeceras: #929292;
+$color-fondo: #8bffcf;
+$tipografia-cabecera: Arial, Helvetica, Verdana;
+$tipografia-general: Georgia, Cambria, Times, "Times New Roman";
+$padding: 15px;
+$ancho-contenedor : 1280px;
+
+
+body{
+    background-color: $color-fondo;
+    font-family: $tipografia-general;
+}
+.col-8{
+    background-color: $color-cabeceras;
+}
+.col-4{
+    background-color: yellow;
+}
+//ANIDACION
+.contenedor-1{    
+    
+    padding: $padding;
+    h1{    
+        font-family: $tipografia-cabecera;
+    }
+    p {
+        background-color: black;
+        color: #fff;        
+      }
+}
+//ANIDACION con selectores
+.contenedor-2{
+        
+    padding: $padding;
+
+    h1 {
+        color: rgb(0, 0, 0);
+        font: {
+           family: verdana;
+           weight: bold;           
+        }
+        &:hover{ color: red;}
+        &:hover{font-size: 300%;}
+      }
+      
+}
