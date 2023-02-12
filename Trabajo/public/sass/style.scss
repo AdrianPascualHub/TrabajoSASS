@@ -4,44 +4,246 @@ $color-fondo: #8bffcf;
 $tipografia-cabecera: Arial, Helvetica, Verdana;
 $tipografia-general: Georgia, Cambria, Times, "Times New Roman";
 $padding: 15px;
-$ancho-contenedor : 1280px;
+$borde: 3px solid black;
 
-
-body{
-    background-color: $color-fondo;
-    font-family: $tipografia-general;
+hr {
+    border: 1px solid red;
 }
-.col-8{
+
+.col-8 {
     background-color: $color-cabeceras;
 }
-.col-4{
-    background-color: yellow;
-}
-//ANIDACION
-.contenedor-1{    
+.col-2{
+    background-color: rgb(0, 92, 92);
     
-    padding: $padding;
-    h1{    
-        font-family: $tipografia-cabecera;
-    }
-    p {
-        background-color: black;
-        color: #fff;        
+    
+}
+.col-4 {    
+    background-image: url(/img/b.jpg);
+    background-size: cover;
+}
+.col-12{
+    .site-footer {
+        background-color: #838383;
+          text-align: center;
+          margin: 10px 0;
+          padding: 10px 0;
+      }
+      
+      #social-wrapper {
+          text-align: center;
+      }
+      
+      /*Social Media Icons*/
+      .social-wrapper {
+          text-align: center;
+      }
+      
+      .social-wrapper ul li {
+          display: inline;
+          margin: 0 5px;
+      }
+      
+      .twitter-icon,
+      .facebook-icon,
+      .instagram-icon,
+      .linkedin-icon,
+      .googleplus-icon,
+      .youtube-icon,
+      .foursquare-icon{
+          margin-top: .625em;
+          width: 40px;
+          height: 40px;
+          opacity: .6;
+          filter: alpha(opacity=60); /* For IE8 and earlier */
+        border-radius: 25px;
+      }
+      
+      .twitter-icon:hover,
+      .facebook-icon:hover,
+      .instagram-icon:hover,
+      .linkedin-icon:hover,
+      .googleplus-icon:hover,
+      .youtube-icon:hover,
+      .foursquare-icon:hover {
+          opacity: 1.0;
+          filter: alpha(opacity=100); /* For IE8 and earlier */
+      }
+      
+      .footer-nav p {
+          text-align: center;
       }
 }
+.imga {
+    width: 100px;
+    float: right;
+    margin-right: 20px;
+    margin-top: -50px;
+}
+
+//MIXINS
+@mixin crea-caja1 {
+    border: $borde;
+    border-radius: 10px;
+    background-color: #00000086;
+    float: left;
+    width: 200px;
+    height: 200px;
+
+    margin-left: 25%;
+    padding: 10px;
+
+    h4 {
+        color: rgb(73, 73, 255);
+    }
+
+    p {
+        color: yellow;
+        text-align: center;
+        //ANIDACION
+        &:hover {
+            font-size: 110%;
+        }
+    }
+}
+
+@mixin crea-caja2 {
+    border: $borde;
+    border-radius: 10px;
+    background-color: #00000086;
+    float: left;
+    width: 200px;
+    height: 200px;
+    margin-left: 20px;
+    padding: 10px;
+
+    h4 {
+        color: rgb(255, 0, 0);
+    }
+
+    p {
+        color: yellow;
+        text-align: center;
+        //ANIDACION
+        &:hover {
+            font-size: 110%;
+        }
+    }
+
+}
+
+@mixin horario {
+    padding: $padding*2;
+    color: #8bffcf;
+    .hor{
+        margin-top: 50px;
+        padding: $padding;
+        border: $borde;
+    }
+    h6{
+        margin-top: 20px;
+        border: $borde;
+        text-align: center;
+    }
+
+}
+
+//ANIDACION
+.contenedor-1 {
+
+    padding: $padding;
+
+    h1 {
+        font-family: $tipografia-cabecera;
+        color: rgb(228, 255, 255);
+    }
+
+    p {
+        background-color: rgb(255, 224, 224);
+        color: #000000;
+        padding: $padding*1.5;
+        font-family: $tipografia-general;
+    }
+}
+
 //ANIDACION con selectores
-.contenedor-2{
-        
+.contenedor-2 {
+
     padding: $padding;
 
     h1 {
         color: rgb(0, 0, 0);
-        font: {
-           family: verdana;
-           weight: bold;           
+        margin-top: 30px;
+        margin-left: 10px;
+
+        a {
+            color: rgb(0, 0, 0);
         }
-        &:hover{ color: red;}
-        &:hover{font-size: 300%;}
-      }
-      
+
+        font: {
+            family: $color-cabeceras;
+        }
+
+        &:hover {
+            color: red;
+        }
+
+        &:hover {
+            font-size: 300%;
+        }
+    }
+
+}
+
+.contenedor-3 {
+    padding: $padding;
+
+    h3 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .not {
+        color: #000000;
+        text-align: center;
+        margin-top: 250px;
+    }
+    //INCLUDES
+    .act {
+        @include crea-caja1;
+    }
+
+    .act1 {
+        @include crea-caja2;
+    }
+}
+
+.contenedor-4{
+    @include horario;
+    .fs{
+        margin-top: 30px;
+    }    
+}
+.contenedor-5{
+    @include horario;    
+}
+
+//FUNCIONES Y OPERACIONES
+@function sqr($num) {
+    @return #{$num * $num}px;
+}
+
+p {
+    font-size: sqr(3.5);
+}
+
+@function invert($color, $amount: 100%) {
+    $inverse: change-color($color, $hue: hue($color) + 180);
+    @return mix($inverse, $color, $amount);
+}
+
+
+
+body {
+    background-color: invert($color-fondo, 60%);
 }
